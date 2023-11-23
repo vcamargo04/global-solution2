@@ -26,7 +26,7 @@ const Header = ({ currentPath }) => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <img src="/logoNotreDame.jpeg" alt="Logo" />
+        <img src="/Rapidmed.png" alt="Logo" />
       </div>
       <nav className={styles.nav}>
         <Link href={oppositePath1}>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from '../../styles/cadastro.module.css';
 import Cabecalho from '../../components/Cabecalho/Cabecalho';
 
+
 const Cadastro = () => {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
@@ -54,9 +55,14 @@ const Cadastro = () => {
     setSenha('');
   };
 
+  
+  const currentPath = '/cadastro';
+  
+ 
+
   return (
     <main>
-    <Cabecalho currentPath="/cadastro" />
+    <Cabecalho currentPath={currentPath} />
     
 <div className={styles.container}>
       <h1 className={styles.title}>Cadastro de Paciente</h1>

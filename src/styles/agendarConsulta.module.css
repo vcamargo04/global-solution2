@@ -1,0 +1,59 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 8px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .button,
+  .linkButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-left: 4px;
+    width: 40%; 
+  }
+  
+  .button:hover,
+  .linkButton:hover {
+    background-color: #0056b3;
+  }
+  
+
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .container {
+      max-width: 80%;
+    }
+  }
+  
+ 
+  @media only screen and (max-width: 767px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .button,
+    .linkButton {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  

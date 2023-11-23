@@ -17,7 +17,7 @@ const LoginForm = ({ onLogin }) => {
       alert('Login bem-sucedido!');
       onLogin(usuarioEncontrado);
       
-      history.push('/agendarConsulta');
+      history.push('/informacoesPaciente');
     } else {
       alert('Credenciais inválidas. Tente novamente.');
     }

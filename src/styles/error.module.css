@@ -1,0 +1,19 @@
+
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .errorImage {
+    width: 100%;
+    max-width: 750px;
+    height: auto;
+  }
+  
+  .backToHome {
+    margin-top: 20px;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }
+  

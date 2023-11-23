@@ -1,9 +1,5 @@
-
 import { useState } from 'react';
 import styles from '../../styles/login.module.css';
-import { createBrowserHistory } from 'history';
-
-const history = createBrowserHistory();
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -16,11 +12,17 @@ const LoginForm = ({ onLogin }) => {
     if (usuarioEncontrado) {
       alert('Login bem-sucedido!');
       onLogin(usuarioEncontrado);
+
       
-      history.push('/informacoesPaciente');
+      navigateTo('/informacoesPaciente');
     } else {
       alert('Credenciais inválidas. Tente novamente.');
     }
+  };
+
+ 
+  const navigateTo = (path) => {
+    window.location.href = path;
   };
 
   return (

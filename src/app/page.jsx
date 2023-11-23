@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from '../styles/home.module.css';
 import cardStyles from '../styles/cardStyles.module.css';
 import Cabecalho from '../components/Cabecalho/Cabecalho';
+import Rodape from '../components/Rodape/Rodape'
 
 const cards = [
   {
@@ -80,6 +81,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    <Rodape/>
     </main>
   );
 };

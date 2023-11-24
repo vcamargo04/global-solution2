@@ -6,10 +6,10 @@ A RapidMed busca liderar o mercado de telemedicina, oferecendo atendimento médi
 
 ## Integrantes 
 
-- Eduardo de Toledo Violante , rm:550364 , cargo no projeto:Desenvolvimento de banco de Dados e Java,
-- Gabriel de Andrade Baltazar, rm:550870 , cargo no projeto:Desenvolvimento de ChatBot,
-- Luiz Felipe Camargo Prendin, rm:552475 ,cargo no projeto:Desenvolvimento de Python e Java,
-- Pedro Gomes Fernandes, rm:551480 ,cargo no projeto:Desenvolvimento de Software Desing,
-- Vinícius De Araújo Camargo, rm:99499 ,cargo no projeto:Desenvolvimento de Web Responsive
+- Eduardo de Toledo Violante , rm: 550364 , cargo no projeto: Desenvolvimento de banco de Dados e Java,
+- Gabriel de Andrade Baltazar, rm: 550870 , cargo no projeto: Desenvolvimento de ChatBot,
+- Luiz Felipe Camargo Prendin, rm: 552475 , cargo no projeto: Desenvolvimento de Python e Java,
+- Pedro Gomes Fernandes, rm: 551480 , cargo no projeto: Desenvolvimento de Software Desing,
+- Vinícius De Araújo Camargo, rm: 99499 , cargo no projeto: Desenvolvimento de Web Responsive
 
 

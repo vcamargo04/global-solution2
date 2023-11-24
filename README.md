@@ -1,4 +1,8 @@
+## Usuários para Teste de Login
 
+email: eduardo@gmail.com //  senha:1234
+email: vinicius@gmail.com // senha:12345
+email: luiz@gmail.com // senha:123456
 
 ## Sobre o Projeto
 

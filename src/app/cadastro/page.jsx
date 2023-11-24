@@ -11,6 +11,26 @@ const Cadastro = () => {
     senha: "",
   });
 
+  const salvarNoSessionStorage = (paciente) => {
+    const pacientesCadastrados = JSON.parse(sessionStorage.getItem("pacientes")) || [];
+    pacientesCadastrados.push(paciente);
+    sessionStorage.setItem("pacientes", JSON.stringify(pacientesCadastrados));
+  };
+
+  const adicionarPacientesPreCadastrados = () => {
+    const pacientesPreCadastrados = [
+      { NM_PACIENTE: "Eduardo", cpf: "12345678901", USER_NAME: "eduardo@gmail.com", senha: "1234" },
+      { NM_PACIENTE: "Vinicius", cpf: "98765432101", USER_NAME: "vinicius@gmail.com", senha: "12345" },
+      { NM_PACIENTE: "Luiz", cpf: "56789012345", USER_NAME: "luiz@gmail.com", senha: "123456" },
+    ];
+
+    pacientesPreCadastrados.forEach((paciente) => salvarNoSessionStorage(paciente));
+  };
+
+  useEffect(() => {
+    adicionarPacientesPreCadastrados();
+  }, []);
+
   const handleChange = (e, field) => {
     const value = e.target.value;
     setCadastroData((prevCadastroData) => ({
@@ -30,7 +50,6 @@ const Cadastro = () => {
       return;
     }
 
-    // Corrigir referência para cpf e nome+sobrenome
     if (!/^\d+$/.test(cadastroData.cpf) || cadastroData.cpf.length !== 11) {
       alert("CPF inválido. Deve conter apenas números e ter 11 caracteres.");
       return;
@@ -46,6 +65,7 @@ const Cadastro = () => {
       });
 
       if (responseCadastro.ok) {
+        salvarNoSessionStorage(cadastroData);
         alert("Cadastro realizado com sucesso!");
         limparCampos();
       } else {
@@ -72,49 +92,7 @@ const Cadastro = () => {
       <div className={styles.container}>
         <h1 className={styles.title}>Cadastro de Paciente</h1>
         <form className={styles.form}>
-          <label className={styles.label} htmlFor="nome">
-            Nome:
-          </label>
-          <input
-            className={styles.input}
-            type="text"
-            id="NM_PACIENTE"
-            value={cadastroData.NM_PACIENTE}
-            onChange={(e) => handleChange(e, "NM_PACIENTE")}
-          />
-
-          <label className={styles.label} htmlFor="cpf">
-            CPF:
-          </label>
-          <input
-            className={styles.input}
-            type="text"
-            id="cpf"
-            value={cadastroData.cpf}
-            onChange={(e) => handleChange(e, "cpf")}
-          />
-
-          <label className={styles.label} htmlFor="email">
-            Email:
-          </label>
-          <input
-            className={styles.input}
-            type="text"
-            id="USER_NAME"
-            value={cadastroData.USER_NAME}
-            onChange={(e) => handleChange(e, "USER_NAME")}
-          />
-
-          <label className={styles.label} htmlFor="senha">
-            Senha:
-          </label>
-          <input
-            className={styles.input}
-            type="password"
-            id="senha"
-            value={cadastroData.senha}
-            onChange={(e) => handleChange(e, "senha")}
-          />
+          {/* ... (campos do formulário) */}
 
           <div className={styles.buttonContainer}>
             <button className={styles.button} type="button" onClick={cadastrar}>
@@ -123,7 +101,8 @@ const Cadastro = () => {
             <button
               className={styles.button}
               type="button"
-              onClick={limparCampos}>
+              onClick={limparCampos}
+            >
               Limpar Dados
             </button>
           </div>

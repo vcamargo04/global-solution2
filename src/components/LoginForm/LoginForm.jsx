@@ -31,10 +31,10 @@ const LoginForm = ({ onLogin }) => {
         <h2 className={styles.title}>Login</h2>
         <form className={styles.form}>
           <label className={styles.label}>Email:</label>
-          <input className={styles.input} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input className={styles.input} type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Digite seu email" required />
 
           <label className={styles.label}>Senha:</label>
-          <input className={styles.input} type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+          <input className={styles.input} type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Digite sua senha" required />
 
           <button className={styles.button} type="button" onClick={handleLogin}>
             Entrar

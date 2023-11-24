@@ -18,7 +18,7 @@ const InformacoesPaciente = () => {
 
   const handleSubmit = () => {
     if (
-      rg.length > 9 ||
+      rg.length !== 9 || 
       rg.trim() === '' ||
       !dataNascimento ||
       sexoBiologico.trim() === '' ||
@@ -32,8 +32,6 @@ const InformacoesPaciente = () => {
       return;
     }
 
-    // Adicione a lógica para salvar no localStorage se necessário
-
     setSalvoComSucesso(true);
   };
 
@@ -45,36 +43,36 @@ const InformacoesPaciente = () => {
         {erro && <p className={styles.error}>{erro}</p>}
         {salvoComSucesso && <p className={styles.success}>Informações salvas com sucesso!</p>}
         <label>
-          RG:
-          <input type="text" value={rg} onChange={(e) => setRg(e.target.value)} className={styles.input} />
+          RG :
+          <input type="text" value={rg} onChange={(e) => setRg(e.target.value)} placeholder="Digite seu RG (9 dígitos)" className={styles.input} />
         </label>
         <label>
           Data de Nascimento:
-          <input type="date" value={dataNascimento} onChange={(e) => setDataNascimento(e.target.value)} className={styles.input} />
+          <input type="date" value={dataNascimento} onChange={(e) => setDataNascimento(e.target.value)} placeholder="Selecione a data" className={styles.input} />
         </label>
         <label>
           Sexo Biológico:
-          <input type="text" value={sexoBiologico} onChange={(e) => setSexoBiologico(e.target.value)} className={styles.input} />
+          <input type="text" value={sexoBiologico} onChange={(e) => setSexoBiologico(e.target.value)} placeholder="Digite seu sexo biológico" className={styles.input} />
         </label>
         <label>
           Escolaridade:
-          <input type="text" value={escolaridade} onChange={(e) => setEscolaridade(e.target.value)} className={styles.input} />
+          <input type="text" value={escolaridade} onChange={(e) => setEscolaridade(e.target.value)} placeholder="Digite sua escolaridade" className={styles.input} />
         </label>
         <label>
           Estado Civil:
-          <input type="text" value={estadoCivil} onChange={(e) => setEstadoCivil(e.target.value)} className={styles.input} />
+          <input type="text" value={estadoCivil} onChange={(e) => setEstadoCivil(e.target.value)} placeholder="Digite seu estado civil" className={styles.input} />
         </label>
         <label>
           Grupo Sanguíneo:
-          <input type="text" value={grupoSanguineo} onChange={(e) => setGrupoSanguineo(e.target.value)} className={styles.input} />
+          <input type="text" value={grupoSanguineo} onChange={(e) => setGrupoSanguineo(e.target.value)} placeholder="Digite seu grupo sanguíneo" className={styles.input} />
         </label>
         <label>
           Altura:
-          <input type="text" value={altura} onChange={(e) => setAltura(e.target.value)} className={styles.input} />
+          <input type="text" value={altura} onChange={(e) => setAltura(e.target.value)} placeholder="Digite sua altura" className={styles.input} />
         </label>
         <label>
           Peso:
-          <input type="text" value={peso} onChange={(e) => setPeso(e.target.value)} className={styles.input} />
+          <input type="text" value={peso} onChange={(e) => setPeso(e.target.value)} placeholder="Digite seu peso" className={styles.input} />
         </label>
         <button className={styles.button} onClick={handleSubmit}>
           Salvar Informações

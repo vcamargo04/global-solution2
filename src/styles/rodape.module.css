@@ -36,7 +36,7 @@
     line-height: 1.1;
   }
   .membersBox p{
-    color: black;
+    color: #000;
   }
   
   .membersBox button {
@@ -58,7 +58,7 @@
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
     padding: 16px;
     text-align: center;
-    color: black;
+    color:#000;
   }
   
   .membersBox .membersCards .card h4 {

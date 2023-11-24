@@ -10,7 +10,7 @@ const Cadastro = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const cadastrar = () => {
+  const cadastrar = async () => {
     if (!nome || !sobrenome || !cpf || !email || !senha) {
       alert('Todos os campos são obrigatórios.');
       return;
@@ -21,21 +21,38 @@ const Cadastro = () => {
       return;
     }
 
-    const paciente = {
-      nome,
-      sobrenome,
-      cpf,
-      email,
-      senha,
-    };
-
-    const pacientesCadastrados = JSON.parse(sessionStorage.getItem('pacientes')) || [];
-    pacientesCadastrados.push(paciente);
-    sessionStorage.setItem('pacientes', JSON.stringify(pacientesCadastrados));
-
-    alert('Cadastro realizado com sucesso!');
-
-    limparCampos();
+    try {
+      const response = await fetch('/api/cadastro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nome, sobrenome, cpf, email, senha }),
+      });
+  
+      if (!response.ok) {
+        
+        throw new Error(`Erro no servidor: ${response.status}`);
+      }
+  
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+       
+        throw new Error('Resposta do servidor não é um JSON válido');
+      }
+  
+      const data = await response.json();
+  
+      if (data) {
+        alert('Cadastro realizado com sucesso!');
+        limparCampos();
+      } else {
+        alert('Ocorreu um erro durante o cadastro. Tente novamente mais tarde.');
+      }
+    } catch (error) {
+      console.error('Erro no cadastro:', error);
+      alert('Ocorreu um erro durante o cadastro. Tente novamente mais tarde.');
+    }
   };
 
   const limparCampos = () => {

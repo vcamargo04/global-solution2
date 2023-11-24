@@ -1,69 +1,69 @@
 "use client";
-import { useState } from 'react';
-import styles from '../../styles/cadastro.module.css';
-import Cabecalho from '../../components/Cabecalho/Cabecalho';
+import { useState } from "react";
+import styles from "../../styles/cadastro.module.css";
+import Cabecalho from "../../components/Cabecalho/Cabecalho";
 
 const Cadastro = () => {
-  const [nome, setNome] = useState('');
-  const [sobrenome, setSobrenome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [cadastroData, setCadastroData] = useState({
+    NM_PACIENTE: "",
+    cpf: "",
+    USER_NAME: "",
+    senha: "",
+  });
+
+  const handleChange = (e, field) => {
+    const value = e.target.value;
+    setCadastroData((prevCadastroData) => ({
+      ...prevCadastroData,
+      [field]: value,
+    }));
+  };
 
   const cadastrar = async () => {
-    if (!nome || !sobrenome || !cpf || !email || !senha) {
-      alert('Todos os campos são obrigatórios.');
+    if (
+      !cadastroData.NM_PACIENTE ||
+      !cadastroData.cpf ||
+      !cadastroData.USER_NAME ||
+      !cadastroData.senha
+    ) {
+      alert("Todos os campos são obrigatórios.");
       return;
     }
 
-    if (!/^\d+$/.test(cpf) || cpf.length !== 11) {
-      alert('CPF inválido. Deve conter apenas números e ter 11 caracteres.');
+    // Corrigir referência para cpf e nome+sobrenome
+    if (!/^\d+$/.test(cadastroData.cpf) || cadastroData.cpf.length !== 11) {
+      alert("CPF inválido. Deve conter apenas números e ter 11 caracteres.");
       return;
     }
 
     try {
-      const response = await fetch('/api/cadastro', {
-        method: 'POST',
+      const responseCadastro = await fetch("http://127.0.0.1:8080/paciente", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nome, sobrenome, cpf, email, senha }),
+        body: JSON.stringify(cadastroData),
       });
-  
-      if (!response.ok) {
-        
-        throw new Error(`Erro no servidor: ${response.status}`);
-      }
-  
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-       
-        throw new Error('Resposta do servidor não é um JSON válido');
-      }
-  
-      const data = await response.json();
-  
-      if (data) {
-        alert('Cadastro realizado com sucesso!');
+
+      if (responseCadastro.ok) {
+        alert("Cadastro realizado com sucesso!");
         limparCampos();
       } else {
-        alert('Ocorreu um erro durante o cadastro. Tente novamente mais tarde.');
+        alert(
+          "Erro ao cadastrar paciente. Verifique os dados e tente novamente."
+        );
       }
     } catch (error) {
-      console.error('Erro no cadastro:', error);
-      alert('Ocorreu um erro durante o cadastro. Tente novamente mais tarde.');
+      console.error("Erro ao fazer a requisição:", error);
+      alert("Erro ao realizar a operação. Tente novamente mais tarde.");
     }
   };
 
   const limparCampos = () => {
-    setNome('');
-    setSobrenome('');
-    setCpf('');
-    setEmail('');
-    setSenha('');
+    setCadastroData({ NM_PACIENTE: "", cpf: "", USER_NAME: "", senha: "" });
   };
 
-  const currentPath = '/cadastro';
+  const currentPath = "/cadastro";
 
   return (
     <main>
@@ -72,26 +72,58 @@ const Cadastro = () => {
       <div className={styles.container}>
         <h1 className={styles.title}>Cadastro de Paciente</h1>
         <form className={styles.form}>
-          <label className={styles.label} htmlFor="nome">Nome:</label>
-          <input className={styles.input} type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Digite seu nome" required />
+          <label className={styles.label} htmlFor="nome">
+            Nome:
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="NM_PACIENTE"
+            value={cadastroData.NM_PACIENTE}
+            onChange={(e) => handleChange(e, "NM_PACIENTE")}
+          />
 
-          <label className={styles.label} htmlFor="sobrenome">Sobrenome:</label>
-          <input className={styles.input} type="text" id="sobrenome" value={sobrenome} onChange={(e) => setSobrenome(e.target.value)} placeholder="Digite seu sobrenome" required />
+          <label className={styles.label} htmlFor="cpf">
+            CPF:
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="cpf"
+            value={cadastroData.cpf}
+            onChange={(e) => handleChange(e, "cpf")}
+          />
 
-          <label className={styles.label} htmlFor="cpf">CPF:</label>
-          <input className={styles.input} type="text" id="cpf" value={cpf} onChange={(e) => setCpf(e.target.value)} placeholder="Digite seu CPF (11 dígitos)" required />
+          <label className={styles.label} htmlFor="email">
+            Email:
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="USER_NAME"
+            value={cadastroData.USER_NAME}
+            onChange={(e) => handleChange(e, "USER_NAME")}
+          />
 
-          <label className={styles.label} htmlFor="email">Email:</label>
-          <input className={styles.input} type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Digite seu email" required />
-
-          <label className={styles.label} htmlFor="senha">Senha:</label>
-          <input className={styles.input} type="password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Digite sua senha" required />
+          <label className={styles.label} htmlFor="senha">
+            Senha:
+          </label>
+          <input
+            className={styles.input}
+            type="password"
+            id="senha"
+            value={cadastroData.senha}
+            onChange={(e) => handleChange(e, "senha")}
+          />
 
           <div className={styles.buttonContainer}>
             <button className={styles.button} type="button" onClick={cadastrar}>
               Cadastrar
             </button>
-            <button className={styles.button} type="button" onClick={limparCampos}>
+            <button
+              className={styles.button}
+              type="button"
+              onClick={limparCampos}>
               Limpar Dados
             </button>
           </div>

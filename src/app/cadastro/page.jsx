@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../../styles/cadastro.module.css";
 import Cabecalho from "../../components/Cabecalho/Cabecalho";
 
@@ -16,20 +16,6 @@ const Cadastro = () => {
     pacientesCadastrados.push(paciente);
     sessionStorage.setItem("pacientes", JSON.stringify(pacientesCadastrados));
   };
-
-  const adicionarPacientesPreCadastrados = () => {
-    const pacientesPreCadastrados = [
-      { NM_PACIENTE: "Eduardo", cpf: "12345678901", USER_NAME: "eduardo@gmail.com", senha: "1234" },
-      { NM_PACIENTE: "Vinicius", cpf: "98765432101", USER_NAME: "vinicius@gmail.com", senha: "12345" },
-      { NM_PACIENTE: "Luiz", cpf: "56789012345", USER_NAME: "luiz@gmail.com", senha: "123456" },
-    ];
-
-    pacientesPreCadastrados.forEach((paciente) => salvarNoSessionStorage(paciente));
-  };
-
-  useEffect(() => {
-    adicionarPacientesPreCadastrados();
-  }, []);
 
   const handleChange = (e, field) => {
     const value = e.target.value;
@@ -83,6 +69,20 @@ const Cadastro = () => {
     setCadastroData({ NM_PACIENTE: "", cpf: "", USER_NAME: "", senha: "" });
   };
 
+  const adicionarPacientesPreCadastrados = () => {
+    const pacientesPreCadastrados = [
+      { NM_PACIENTE: "Eduardo", cpf: "12345678901", USER_NAME: "eduardo@gmail.com", senha: "1234" },
+      { NM_PACIENTE: "Vinicius", cpf: "23456789012", USER_NAME: "vinicius@gmail.com", senha: "12345" },
+      { NM_PACIENTE: "Luiz", cpf: "34567890123", USER_NAME: "luiz@gmail.com", senha: "123456" },
+    ];
+
+    pacientesPreCadastrados.forEach(salvarNoSessionStorage);
+  };
+
+  useEffect(() => {
+    adicionarPacientesPreCadastrados();
+  }, []);
+
   const currentPath = "/cadastro";
 
   return (
@@ -92,7 +92,49 @@ const Cadastro = () => {
       <div className={styles.container}>
         <h1 className={styles.title}>Cadastro de Paciente</h1>
         <form className={styles.form}>
-          {/* ... (campos do formulário) */}
+          <label className={styles.label} htmlFor="NM_PACIENTE">
+            Nome:
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="NM_PACIENTE"
+            value={cadastroData.NM_PACIENTE}
+            onChange={(e) => handleChange(e, "NM_PACIENTE")}
+          />
+
+          <label className={styles.label} htmlFor="cpf">
+            CPF:
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="cpf"
+            value={cadastroData.cpf}
+            onChange={(e) => handleChange(e, "cpf")}
+          />
+
+          <label className={styles.label} htmlFor="USER_NAME">
+            Email:
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="USER_NAME"
+            value={cadastroData.USER_NAME}
+            onChange={(e) => handleChange(e, "USER_NAME")}
+          />
+
+          <label className={styles.label} htmlFor="senha">
+            Senha:
+          </label>
+          <input
+            className={styles.input}
+            type="password"
+            id="senha"
+            value={cadastroData.senha}
+            onChange={(e) => handleChange(e, "senha")}
+          />
 
           <div className={styles.buttonContainer}>
             <button className={styles.button} type="button" onClick={cadastrar}>
@@ -101,8 +143,7 @@ const Cadastro = () => {
             <button
               className={styles.button}
               type="button"
-              onClick={limparCampos}
-            >
+              onClick={limparCampos}>
               Limpar Dados
             </button>
           </div>
